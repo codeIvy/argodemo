@@ -18,3 +18,18 @@ spec:
           ports:
             - containerPort: 80
               name: nginx-http-port
+          volumeMounts:
+            - name: index-html-volume
+              mountPath: /usr/share/nginx/html/
+
+      initContainers:
+        - name: get-pod-hostname
+          image: busybox
+          command: ['sh', '-c', "hostname > /index-volume-mount/index.html"]
+          volumeMounts:
+            - name: index-html-volume
+              mountPath: /index-volume-mount
+      volumes:
+        - name: index-html-volume
+          emptyDir: {}
+
