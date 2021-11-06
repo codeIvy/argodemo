@@ -25,7 +25,7 @@ spec:
       initContainers:
         - name: get-pod-hostname
           image: busybox
-          command: ['sh', '-c', "hostname > /index-volume-mount/index.html"]
+          command: ['sh', '-c', "echo $(date) > /index-volume-mount/index.html"]
           volumeMounts:
             - name: index-html-volume
               mountPath: /index-volume-mount
